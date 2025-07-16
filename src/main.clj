@@ -8,7 +8,11 @@
     (boolean? x) (if x "true" "false")
     (string? x) (if (.test symbol_regex x)
                   (str ":" x)
-                  (str "\"" x "\""))
+                  (str "\""
+                       (.replaceAll
+                        (.replaceAll x "\\" "\\\\")
+                        "\"" "\\\"")
+                       "\""))
 
     (vector? x)
     (str "["
